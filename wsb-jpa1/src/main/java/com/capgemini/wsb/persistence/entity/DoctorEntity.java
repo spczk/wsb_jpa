@@ -2,6 +2,8 @@ package com.capgemini.wsb.persistence.entity;
 
 import com.capgemini.wsb.persistence.enums.Specialization;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,11 +11,19 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "DOCTOR")
 public class DoctorEntity {
+
+	@OneToMany(mappedBy = "doctor", orphanRemoval = true)
+	private Collection<VisitEntity> visits;
+
+	@OneToOne
+	private AddressEntity address;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

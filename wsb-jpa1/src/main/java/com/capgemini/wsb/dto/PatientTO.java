@@ -1,49 +1,30 @@
-package com.capgemini.wsb.persistence.entity;
+package com.capgemini.wsb.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+public class PatientTO implements Serializable {
+    
+    private Long id;
 
-@Entity
-@Table(name = "PATIENT")
-public class PatientEntity {
-
-	@OneToMany(mappedBy = "patient", orphanRemoval = true)
-	private List<VisitEntity> visits;
-
-	@OneToOne
-	private AddressEntity address;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@Column(nullable = false)
 	private String firstName;
 
-	@Column(nullable = false)
 	private String lastName;
 
-	@Column(nullable = false)
 	private String telephoneNumber;
 
 	private String email;
 
-	@Column(nullable = false)
 	private String patientNumber;
 
-	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 
-	@Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+	private AddressTO address;
+
+	private List<Long> visitsID;
+
 	private Boolean stillAlive;
 
 	public Long getId() {
@@ -102,20 +83,20 @@ public class PatientEntity {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public AddressEntity getAddress() {
+	public AddressTO getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress(AddressTO address) {
 		this.address = address;
 	}
 
-	public List<VisitEntity> getVisits() {
-		return visits;
+	public List<Long> getVisitsID() {
+		return visitsID;
 	}
 
-	public void setVisits(List<VisitEntity> visits) {
-		this.visits = visits;
+	public void setVisitsID(List<Long> visitsID) {
+		this.visitsID = visitsID;
 	}
 
 	public void setStillAlive(Boolean stillAlive) {
@@ -125,5 +106,4 @@ public class PatientEntity {
 	public Boolean getStillAlive() {
 		return stillAlive;
 	}
-
 }

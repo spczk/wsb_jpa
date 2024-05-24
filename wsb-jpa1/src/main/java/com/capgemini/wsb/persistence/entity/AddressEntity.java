@@ -4,11 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ADDRESS")
 public class AddressEntity {
+
+	@OneToOne(mappedBy = "address")
+	private PatientEntity patient;
+
+	@OneToOne(mappedBy = "address")
+	private DoctorEntity doctor;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
